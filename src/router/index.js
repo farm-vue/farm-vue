@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Main from '../components/index.vue'
 import User from '../views/User.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter);
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: User,
-    },
+    // {
+    //     path: '/',
+    //     name: 'Home',
+    //     component: User,
+    // },
     // {
     //     path: '/about',
     //     name: 'About',
@@ -20,14 +21,27 @@ const routes = [
     //     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     // },
     {
-        path: '/user',
-        name: 'User',
-        component: User,
+        path: '/',
+        name: 'Main',
+        component: Main,
+        children:[
+            {
+              // 内容页
+              path: '/',
+              name: 'User',
+              component: User
+            }
+        ]
     },
+    // {
+    //     path: '/user',
+    //     name: 'User',
+    //     component: Main
+    // },
     {
         path: '/login',
         name: 'Login',
-        component: Login,
+        component: Login
     }
 
 ];
