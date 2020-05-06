@@ -26,15 +26,21 @@
             }
         },
         methods: {
-            onSubmit(username, password) {
-                console.log('submit!');
-                console.log(username, password);
-            },
             userLogin(username, password) {
-                console.log(username, password);
                 this.$http.login(username, password)
                 .then(res => {
-                    console.log(res)
+                    if (res.status == 200) {
+                        this.$message({
+                            message: res.data,
+                            type: "success"
+                        })
+                    } else {
+                        this.$message({
+                            message: res.data,
+                            type: "error"
+                        })
+                    }
+                    console.log(res.status)
                 })
             }
         }

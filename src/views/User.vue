@@ -1,39 +1,16 @@
 <template>
     <el-container direction="vertical">
-        <el-table ref="multipleTable" :data="tableData" style="width: 100%" border highlight-current-row
-                  @selection-change="handleSelectionChange">
-            <el-table-column
-                    type="selection"
-                    width="55">
-            </el-table-column>
-            <el-table-column
-                    prop="id"
-                    label="ID"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    label="注册日期"
-                    width="120">
-                <template slot-scope="scope">{{ scope.row.date }}</template>
-            </el-table-column>
-            <el-table-column
-                    prop="name"
-                    label="账号"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="name"
-                    label="手机号"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="address"
-                    label="地址">
-            </el-table-column>
-            <el-table-column
-                    fixed="right"
-                    label="操作"
-                    width="250">
+        <el-table ref="multipleTable" :data="tableData" :header-row-style="headerHeight" max-height="730" border @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="50"></el-table-column>
+            <el-table-column prop="id" label="ID"></el-table-column>
+            <el-table-column prop="username" label="账号" ></el-table-column>
+            <el-table-column prop="nickname" label="昵称" ></el-table-column>
+            <el-table-column prop="sex" label="性别"  :formatter="formatSex"></el-table-column>
+            <el-table-column prop="role" label="角色"  :formatter="formatRole"></el-table-column>
+            <el-table-column prop="phone" label="电话" ></el-table-column>
+            <el-table-column prop="email" label="邮箱" ></el-table-column>
+            <el-table-column prop="address" label="地址" ></el-table-column>
+            <el-table-column fixed="right" label="操作" width="250">
                 <template slot-scope="scope">
                     <el-button size="mini">查看</el-button>
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -41,52 +18,30 @@
                 </template>
             </el-table-column>
         </el-table>
+        <div class="block">
+            <span class="demonstration"></span>
+            <el-pagination
+                    background
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page.sync="currentPage1"
+                    :page-size="100"
+                    layout="total, prev, pager, next"
+                    :total="1000">
+            </el-pagination>
+        </div>
     </el-container>
 </template>
 
 <script>
+
     export default {
         name: "User",
         data() {
             return {
-                tableData: [{
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-08',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-06',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }],
-                multipleSelection: []
+                tableData: [],
+                multipleSelection: [],
+                currentPage1: 5,
             }
         },
         methods: {
@@ -98,15 +53,15 @@
             //     }
             //     return '';
             // }
-            toggleSelection(rows) {
-                if (rows) {
-                    rows.forEach(row => {
-                        this.$refs.multipleTable.toggleRowSelection(row);
-                    });
-                } else {
-                    this.$refs.multipleTable.clearSelection();
-                }
-            },
+            // toggleSelection(rows) {
+            //     if (rows) {
+            //         rows.forEach(row => {
+            //             this.$refs.multipleTable.toggleRowSelection(row);
+            //         });
+            //     } else {
+            //         this.$refs.multipleTable.clearSelection();
+            //     }
+            // },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
@@ -115,21 +70,41 @@
             },
             handleDelete(index, row) {
                 console.log(index, row);
+            },
+            getUserList() {
+                this.$http.UserList().then(res => {
+                    console.log(res)
+                    this.tableData = res
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            formatSex: function(row) {
+                return row.sex == 0 ? '男' :row.sex == 1 ? '女' : '保密'
+            },
+            formatRole: function(row) {
+                return row.role == 0 ? '客户' :row.role == 1 ? '管理员' : '未知'
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            },
+            headerHeight({rowIndex}) {
+                if (rowIndex === 0) {
+                    return 'height:80px'
+                } else {
+                    return ''
+                }
             }
         },
+        created() {
+            this.getUserList()
+        }
     }
 </script>
 
 <style scoped>
-    .el-table__header tr,
-    .el-table__header th {
-        padding: 0;
-        height: 40px;
-    }
 
-    .el-table__body tr,
-    .el-table__body td {
-        padding: 0;
-        height: 40px;
-    }
 </style>
