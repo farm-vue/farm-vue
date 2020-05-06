@@ -30,9 +30,8 @@
 </template>
 
 <script>
-
     export default {
-        name: "User",
+        name: "Project",
         data() {
             return {
                 tableData: [],

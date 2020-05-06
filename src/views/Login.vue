@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <el-container>
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="用户名">
                 <el-input v-model="form.username"></el-input>
@@ -11,7 +11,7 @@
                 <el-button type="primary"  @click="userLogin(form.username, form.password)">登录</el-button>
             </el-form-item>
         </el-form>
-    </div>
+    </el-container>
 </template>
 
 <script>
@@ -54,5 +54,8 @@
 </script>
 
 <style scoped>
-
+    .el-container{
+        float: left;
+        left: 50%;
+    }
 </style>

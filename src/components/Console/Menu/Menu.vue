@@ -15,22 +15,13 @@
 <script>
     export default {
         name: "Menu",
-        // methods: {
-        //     handleOpen(key, keyPath) {
-        //         console.log(key, keyPath);
-        //     },
-        //     handleClose(key, keyPath) {
-        //         console.log(key, keyPath);
-        //     }
-        // },
         data() {
             return {
                 navList: [
-                    {name: '/user', navItem: '用户中心', icon: "el-icon-user-solid"},
-                    {name: '/project', navItem: '产品中心', icon: "el-icon-document"},
-                    {name: '/order', navItem: '订单中心', icon: "el-icon-s-order"},
-                    {name: '/custom', navItem: '销售管理', icon: "el-icon-s-custom"},
-                    // {name: '/manageCenter', navItem: '管理员中', icon: "el-icon-user-solid"},
+                    {name: '/user', navItem: '用户管理', icon: "el-icon-user-solid"},
+                    {name: '/category', navItem: '产品类别', icon: "el-icon-document"},
+                    {name: '/project', navItem: '产品信息', icon: "el-icon-document"},
+                    {name: '/order', navItem: '订单管理', icon: "el-icon-s-order"},
                 ]
             }
         }

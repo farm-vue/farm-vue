@@ -30,9 +30,8 @@
 </template>
 
 <script>
-
     export default {
-        name: "User",
+        name: "Category",
         data() {
             return {
                 tableData: [],

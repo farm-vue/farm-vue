@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Console from '../components/Console/index.vue'
 import Home from '../components/Home/index.vue'
-import User from '../views/User.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter);
@@ -30,15 +29,25 @@ const routes = [
               // 内容页
               path: '/user',
               name: 'User',
-              component: User
+              component: () => import('../views/User.vue')
+            },
+            {
+                path: '/category',
+                name: 'Category',
+                component: () => import('../views/Category.vue')
+            },
+            {
+                path: '/project',
+                name: 'Project',
+                component: () => import('../views/Project.vue')
+            },
+            {
+                path:'/order',
+                name: 'Order',
+                component: () => import('../views/Order.vue')
             }
         ]
     },
-    // {
-    //     path: '/user',
-    //     name: 'User',
-    //     component: Main
-    // },
     {
         path: '/login',
         name: 'Login',
