@@ -20,9 +20,9 @@
 </template>
 
 <script>
-    import Header from '@/components/Header/Header.vue'
-    import Menu from '@/components/Menu/Menu.vue'
-    import Main from '@/components/Main/Main.vue'
+    import Header from '@/components/Console/Header/Header.vue'
+    import Menu from '@/components/Console/Menu/Menu.vue'
+    import Main from '@/components/Console/Main/Main.vue'
 
     export default {
         name: "BackHome",

@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Main from '../components/index.vue'
+import Console from '../components/Console/index.vue'
+import Home from '../components/Home/index.vue'
 import User from '../views/User.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter);
 
 const routes = [
-    // {
-    //     path: '/',
-    //     name: 'Home',
-    //     component: User,
-    // },
+    {
+        path: '/',
+        name: 'Home',
+        component: Home,
+    },
     // {
     //     path: '/about',
     //     name: 'About',
@@ -21,13 +22,13 @@ const routes = [
     //     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     // },
     {
-        path: '/',
-        name: 'Main',
-        component: Main,
+        path: '/console',
+        name: 'Console',
+        component: Console,
         children:[
             {
               // 内容页
-              path: '/',
+              path: '/user',
               name: 'User',
               component: User
             }
@@ -41,7 +42,10 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {
+            isLogin: false
+        }
     }
 
 ];

@@ -29,11 +29,17 @@
             userLogin(username, password) {
                 this.$http.login(username, password)
                 .then(res => {
-                    if (res.status == 200) {
+                    if (res.code == 200) {
                         this.$message({
                             message: res.data,
                             type: "success"
-                        })
+                        });
+                        //设置Vuex登录标志为true，默认userLogin为false
+                        this.$store.dispatch("userLogin", true);
+                        //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
+                        //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
+                        localStorage.setItem("Flag", "isLogin");
+                        this.$router.push('/')
                     } else {
                         this.$message({
                             message: res.data,

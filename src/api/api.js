@@ -1,6 +1,11 @@
 import Axios from "axios";
 
 Axios.defaults.baseURL = "http://localhost:8000";
+Axios({
+    headers: {
+
+    }
+})
 
 const loginUrl = "/user/login/";
 const logoutUrl = "/user/logout/";
@@ -11,7 +16,7 @@ export function login(username, password) {
     return Axios.post(loginUrl, {
         username: username,
         password: password,
-    }).then(res => res)
+    }).then(res => res.data)
 }
 
 export function logout(user) {
