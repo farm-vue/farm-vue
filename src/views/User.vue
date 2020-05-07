@@ -1,7 +1,6 @@
 <template>
     <el-container direction="vertical">
-        <el-table ref="multipleTable" :data="tableData" :header-row-style="headerHeight" max-height="730" border
-                  @selection-change="handleSelectionChange">
+        <el-table ref="multipleTable" :data="tableData" max-height="730" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
             <el-table-column prop="id" label="ID"></el-table-column>
             <el-table-column prop="username" label="账号"></el-table-column>
@@ -101,13 +100,6 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
             },
-            headerHeight({rowIndex}) {
-                if (rowIndex === 0) {
-                    return 'height:80px'
-                } else {
-                    return ''
-                }
-            }
         },
         created() {
             this.getUserList()

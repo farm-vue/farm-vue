@@ -21,14 +21,12 @@ Axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-
-
-
 const loginUrl = "/user/login/";
 const logoutUrl = "/user/logout/";
 const userListUrl = "/user/";
-const categoryUrl = '/category/'
-
+const categoryUrl = '/category/';
+const productUrl = '/produce/';
+const orderUrl = '/order/';
 
 export function login(username, password) {
     return Axios.post(loginUrl, {
@@ -61,5 +59,13 @@ export function userDel(userId) {
 
 export function categoryList() {
     return Axios.get(categoryUrl).then(res => res.data)
+}
+
+export function productList() {
+    return Axios.get(productUrl).then(res => res.data)
+}
+
+export function orderList() {
+    return Axios.get(orderUrl).then(res => res.data)
 }
 

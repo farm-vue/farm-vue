@@ -3,17 +3,13 @@
         <el-table ref="multipleTable" :data="tableData" :header-row-style="headerHeight" max-height="730" border
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
-            <el-table-column prop="id" label="ID"></el-table-column>
-            <el-table-column prop="username" label="账号"></el-table-column>
-            <el-table-column prop="nickname" label="昵称"></el-table-column>
-            <el-table-column prop="sex" label="性别" :formatter="formatSex"></el-table-column>
-            <el-table-column prop="role" label="角色" :formatter="formatRole"></el-table-column>
-            <el-table-column prop="phone" label="电话"></el-table-column>
-            <el-table-column prop="email" label="邮箱"></el-table-column>
-            <el-table-column prop="address" label="地址"></el-table-column>
+            <el-table-column prop="orderNumber" label="订单编号"></el-table-column>
+            <el-table-column prop="name" label="订单名称"></el-table-column>
+            <el-table-column prop="price" label="价格"></el-table-column>
+            <el-table-column prop="state" label="订单状态"></el-table-column>
+            <el-table-column prop="user" label="客户名称"></el-table-column>
             <el-table-column fixed="right" label="操作" width="250">
                 <template slot-scope="scope">
-                    <el-button size="mini">查看</el-button>
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
@@ -81,7 +77,7 @@
                 )
             },
             getUserList() {
-                this.$http.userList().then(res => {
+                this.$http.orderList().then(res => {
                     console.log(res)
                     this.tableData = res
                 }).catch(err => {

@@ -4,16 +4,9 @@
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
             <el-table-column prop="id" label="ID"></el-table-column>
-            <el-table-column prop="username" label="账号"></el-table-column>
-            <el-table-column prop="nickname" label="昵称"></el-table-column>
-            <el-table-column prop="sex" label="性别" :formatter="formatSex"></el-table-column>
-            <el-table-column prop="role" label="角色" :formatter="formatRole"></el-table-column>
-            <el-table-column prop="phone" label="电话"></el-table-column>
-            <el-table-column prop="email" label="邮箱"></el-table-column>
-            <el-table-column prop="address" label="地址"></el-table-column>
+            <el-table-column prop="name" label="账号"></el-table-column>
             <el-table-column fixed="right" label="操作" width="250">
                 <template slot-scope="scope">
-                    <el-button size="mini">查看</el-button>
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
@@ -81,18 +74,12 @@
                 )
             },
             getUserList() {
-                this.$http.userList().then(res => {
+                this.$http.categoryList().then(res => {
                     console.log(res)
                     this.tableData = res
                 }).catch(err => {
                     console.log(err);
                 })
-            },
-            formatSex: function (row) {
-                return row.sex == 0 ? '男' : row.sex == 1 ? '女' : '保密'
-            },
-            formatRole: function (row) {
-                return row.role == 0 ? '客户' : row.role == 1 ? '管理员' : '未知'
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
