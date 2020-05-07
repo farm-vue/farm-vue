@@ -59,20 +59,12 @@
         text-align: center;
         line-height: 200px;
         height: 100%;
-        /*width: 80px;*/
-        /*display: block;*/
-        /*!*position: absolute;*!*/
-        /*left: 0;*/
-        /*top: 0;*/
-        /*bottom: 0;*/
-        /*overflow-y: scroll;*/
     }
 
     .el-main {
-        /*background-color: #E9EEF3;*/
         color: #333;
         text-align: center;
-        line-height: 160px;
+        line-height: inherit;
         height: 100%;
     }
 

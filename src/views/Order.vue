@@ -1,7 +1,14 @@
 <template>
     <el-container direction="vertical">
-        <el-table ref="multipleTable" :data="tableData" :header-row-style="headerHeight" max-height="730" border
-                  @selection-change="handleSelectionChange">
+        <el-row>
+            <el-col :span="7">
+                <div class="grid-content bg-purple-light">
+                    <el-input v-model="input" placeholder="请输入内容" style="width: 200px; margin-left: 10px;"></el-input>
+                    <el-button icon="el-icon-search">搜索</el-button>
+                </div>
+            </el-col>
+        </el-row>
+        <el-table ref="multipleTable" :data="tableData" max-height="730" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
             <el-table-column prop="orderNumber" label="订单编号"></el-table-column>
             <el-table-column prop="name" label="订单名称"></el-table-column>
@@ -37,7 +44,8 @@
                     limit: 10,
                     p: undefined,
                     total: 10
-                }
+                },
+                input: '',
             }
         },
         methods: {
@@ -76,7 +84,7 @@
                     }
                 )
             },
-            getUserList() {
+            getOrderList() {
                 this.$http.orderList().then(res => {
                     console.log(res)
                     this.tableData = res
@@ -95,21 +103,21 @@
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-            },
-            headerHeight({rowIndex}) {
-                if (rowIndex === 0) {
-                    return 'height:80px'
-                } else {
-                    return ''
-                }
             }
         },
         created() {
-            this.getUserList()
+            this.getOrderList()
         }
     }
 </script>
 
 <style scoped>
+    .el-row {
+        height: 60px;
+        line-height: 60px;
+    }
 
+    .el-input {
+        width: 250px;
+    }
 </style>

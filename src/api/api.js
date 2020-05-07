@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-Axios.defaults.baseURL = "http://localhost:8000";
+Axios.defaults.baseURL = "http://47.98.153.78:9000/";
 // Axios.defaults.headers.common['X-csrftoken'] = ''
 
 // 添加一个请求拦截器
@@ -63,6 +63,10 @@ export function categoryList() {
 
 export function productList() {
     return Axios.get(productUrl).then(res => res.data)
+}
+
+export function addProduct(param) {
+    return Axios.post(productUrl, param).then(res => res.data)
 }
 
 export function orderList() {

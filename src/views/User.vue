@@ -1,5 +1,13 @@
 <template>
     <el-container direction="vertical">
+        <el-row>
+            <el-col :span="7">
+                <div class="grid-content bg-purple-light">
+                    <el-input v-model="input" placeholder="请输入内容" style="width: 200px; margin-left: 10px;"></el-input>
+                    <el-button icon="el-icon-search">搜索</el-button>
+                </div>
+            </el-col>
+        </el-row>
         <el-table ref="multipleTable" :data="tableData" max-height="730" border @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
             <el-table-column prop="id" label="ID"></el-table-column>
@@ -41,7 +49,8 @@
                     limit: 10,
                     p: undefined,
                     total: 10
-                }
+                },
+                input:'',
             }
         },
         methods: {
@@ -108,5 +117,12 @@
 </script>
 
 <style scoped>
+    .el-row {
+        height: 60px;
+        line-height: 60px;
+    }
 
+    .el-input {
+        width: 250px;
+    }
 </style>
