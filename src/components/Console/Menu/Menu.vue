@@ -22,6 +22,7 @@
                     {name: '/category', navItem: '产品类别', icon: "el-icon-document"},
                     {name: '/project', navItem: '产品信息', icon: "el-icon-document"},
                     {name: '/order', navItem: '订单管理', icon: "el-icon-s-order"},
+                    {name: '/test', navItem: '测试', icon: "el-icon-s-order"},
                 ]
             }
         }
