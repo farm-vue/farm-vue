@@ -9,7 +9,8 @@
                 </div>
             </el-col>
         </el-row>
-        <el-table ref="multipleTable" :data="tableData" max-height="730" border @selection-change="handleSelectionChange">
+        <el-table ref="multipleTable" :data="tableData" max-height="730" border
+                  @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
             <el-table-column prop="id" label="ID"></el-table-column>
             <el-table-column prop="name" label="账号"></el-table-column>
@@ -27,6 +28,21 @@
                            :total="page.total">
             </el-pagination>
         </div>
+        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" ref="drawer">
+            <div class="demo-drawer__content">
+                <el-form :model="form">
+                    <el-form-item label="类别名称" :label-width="formLabelWidth">
+                        <el-input v-model="form.name" autocomplete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div class="demo-drawer__footer">
+                    <el-button @click="cancelForm">取 消</el-button>
+                    <el-button type="primary" @click="$refs.drawer.closeDrawer()" :loading="loading">{{ loading ?
+                        '提交中...' : '确 定' }}
+                    </el-button>
+                </div>
+            </div>
+        </el-drawer>
     </el-container>
 </template>
 
@@ -44,6 +60,13 @@
                     total: 10
                 },
                 input: '',
+                dialog: false,
+                loading: false,
+                form: {
+                    name: '',
+                },
+                formLabelWidth: '80px',
+                timer: null,
             }
         },
         methods: {
@@ -95,6 +118,11 @@
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+            },
+            cancelForm() {
+                this.loading = false;
+                this.dialog = false;
+                clearTimeout(this.timer);
             },
         },
         created() {
