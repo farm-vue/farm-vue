@@ -48,7 +48,6 @@
                                 type: "error"
                             })
                         }
-                        console.log(res.status)
                     })
             }
         }

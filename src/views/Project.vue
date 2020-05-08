@@ -34,7 +34,7 @@
                            :total="page.total">
             </el-pagination>
         </div>
-        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" ref="drawer">
+        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" ref="drawer" @close="form=[]">
             <div class="demo-drawer__content">
                 <el-form :model="form">
                     <el-form-item label="产品名称" :label-width="formLabelWidth">
@@ -166,6 +166,7 @@
                 this.loading = false;
                 this.dialog = false;
                 clearTimeout(this.timer);
+                this.form = []
             },
 
             // 分页

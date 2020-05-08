@@ -2,8 +2,8 @@
     <el-container direction="vertical">
         <el-header style="height: 40px">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ path: '/user'}">用户中心</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/console' }">首页</el-breadcrumb-item>
+<!--                <el-breadcrumb-item :to="{ path: '/user'}">用户中心</el-breadcrumb-item>-->
             </el-breadcrumb>
         </el-header>
         <el-container style="padding: 10px">

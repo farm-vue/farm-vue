@@ -28,7 +28,7 @@
                            :total="page.total">
             </el-pagination>
         </div>
-        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" ref="drawer">
+        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" ref="drawer" @close="form=[]">
             <div class="demo-drawer__content">
                 <el-form :model="form">
                     <el-form-item label="类别名称" :label-width="formLabelWidth">
@@ -70,32 +70,17 @@
             }
         },
         methods: {
-            // tableRowClassName({rowIndex}) {
-            //     if (rowIndex === 1) {
-            //         return 'warning-row';
-            //     } else if (rowIndex === 3) {
-            //         return 'success-row';
-            //     }
-            //     return '';
-            // }
-            // toggleSelection(rows) {
-            //     if (rows) {
-            //         rows.forEach(row => {
-            //             this.$refs.multipleTable.toggleRowSelection(row);
-            //         });
-            //     } else {
-            //         this.$refs.multipleTable.clearSelection();
-            //     }
-            // },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
             handleEdit(index, row) {
                 console.log(index, row);
+                this.form = row
+                this.dialog = true
             },
             handleDelete(index, row) {
                 console.log(index, row.id);
-                this.$http.userDel(row.id).then(res => {
+                this.$http.categoryDel(row.id).then(res => {
                         console.log(res)
                         this.tableData.splice(index, 1);
                         this.$message({
