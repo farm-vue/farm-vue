@@ -35,7 +35,7 @@ export default new Vuex.Store({
         logout({ commit }, token) {
             return new Promise((resolve, reject) => {
             console.log(token)
-              logout(token).then(res => {
+              logout().then(res => {
                   if(res.code === 200 ) {
                        commit('userStatus', false)
                         localStorage.removeItem('token')
