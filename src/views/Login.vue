@@ -1,6 +1,7 @@
 <template>
     <el-container>
         <el-main>
+            欢迎登录
             <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="用户名">
                     <el-input v-model="form.username"></el-input>
@@ -31,7 +32,7 @@
             userLogin(username, password) {
                 this.$http.login(username, password)
                     .then(res => {
-                        if (res.code == 200) {
+                        if (res.code === 200) {
                             this.$message({
                                 message: res.data,
                                 type: "success"
@@ -39,6 +40,12 @@
                             //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
                             //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
                             this.$store.commit('userStatus', true)
+                            if (res.user.role === '1') {
+                                this.$store.commit('userAdmin', true)
+                            } else {
+                                this.$store.commit('userAdmin', false)
+                            }
+
                             localStorage.setItem("Flag", "isLogin");
                             localStorage.token = res.token
                             this.$router.push('/')
