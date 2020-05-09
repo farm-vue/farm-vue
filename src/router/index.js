@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Console from '../components/Console/index.vue'
 import Home from '../components/Home/index.vue'
 import Login from '../views/Login.vue'
+import Register from "../views/Register";
 
 Vue.use(VueRouter);
 
@@ -12,24 +13,29 @@ const routes = [
         name: 'Home',
         component: Home,
     },
-    // {
-    //     path: '/about',
-    //     name: 'About',
-    //     // route level code-splitting
-    //     // this generates a separate chunk (about.[hash].js) for this route
-    //     // which is lazy-loaded when the route is visited.
-    //     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    // },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login,
+        meta: {
+            isLogin: false
+        }
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register,
+    },
     {
         path: '/console',
         name: 'Console',
         component: Console,
         children:[
             {
-              // 内容页
-              path: '/user',
-              name: 'User',
-              component: () => import('../views/User.vue')
+                // 内容页
+                path: '/user',
+                name: 'User',
+                component: () => import('../views/User.vue')
             },
             {
                 path: '/category',
@@ -48,15 +54,6 @@ const routes = [
             },
         ]
     },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login,
-        meta: {
-            isLogin: false
-        }
-    }
-
 ];
 
 const router = new VueRouter({
