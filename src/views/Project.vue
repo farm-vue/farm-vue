@@ -1,14 +1,10 @@
 <template>
     <el-container direction="vertical">
-        <el-row>
-            <el-col :span="7">
-                <div class="grid-content bg-purple-light">
+      <div class="grid-content bg-purple-light">
                     <el-input v-model="input" placeholder="请输入内容" style="width: 200px; margin-left: 10px;"></el-input>
                     <el-button icon="el-icon-search">搜索</el-button>
                     <el-button type="primary" icon="el-icon-plus" @click="dialog = true">新增</el-button>
-                </div>
-            </el-col>
-        </el-row>
+        </div>
         <el-table ref="multipleTable" :data="tableData" max-height="730" border
                   @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
@@ -34,7 +30,7 @@
                            :total="page.total">
             </el-pagination>
         </div>
-        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" ref="drawer">
+        <el-drawer :visible.sync="dialog" direction="rtl" custom-class="demo-drawer" @close="form = {}" ref="drawer">
             <div class="demo-drawer__content">
                 <el-form :model="form">
                     <el-form-item label="产品名称" :label-width="formLabelWidth">
