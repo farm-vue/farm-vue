@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="12">
-            <el-menu :default-active="this.$route.path" router class="el-menu-vertical-demo" background-color="#545c64"
+            <el-menu :default-active="this.$route.path" router class="el-menu-vertical-demo" background-color="#85C1E9"
                      text-color="#fff" active-text-color="#ffd04b">
                 <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
                     <i :class="item.icon"></i>

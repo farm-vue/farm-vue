@@ -1,18 +1,21 @@
 <template>
     <el-container>
-        <el-header><Header></Header></el-header>
-        <el-main><Main/></el-main>
+        <el-header>
+            <Header></Header>
+        </el-header>
+        <el-main>
+            <router-view/>
+        </el-main>
     </el-container>
 </template>
 
 <script>
     import Header from "@/components/Home/Header/Header.vue";
-    import Main from "@/components/Home/Main/Main.vue";
+
     export default {
         name: "index",
         components: {
             Header,
-            Main
         }
     }
 </script>

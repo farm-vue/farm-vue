@@ -49,7 +49,7 @@
                             }
                             localStorage.setItem("isLogin", res.user.username);
                             localStorage.token = res.token
-                            this.$router.push('/')
+                            this.$router.push('/home')
                         } else {
                             this.$message({
                                 message: res.data,

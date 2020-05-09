@@ -1,8 +1,8 @@
 <template>
     <div>
         <el-carousel :interval="4000" type="card" height="400px">
-            <el-carousel-item v-for="(item, index) in bannerImg" :key="index">
-                <img v-bind:src="item.url" class="bannerImg" width="100%" height="100%">
+            <el-carousel-item v-for="item in bannerImg" :key="item.id">
+                <img :src="item.url" class="bannerImg" width="100%" height="100%">
             </el-carousel-item>
         </el-carousel>
         <div class="card">
@@ -12,7 +12,11 @@
                         <div style="padding: 14px;">
                             <span>{{o.name}}</span>
                             <div class="bottom clearfix">
-<!--                                <time class="time">{{ currentDate }}</time>-->
+                                <time class="time"> 生产日期{{ o.productionDate }}</time>
+                                <time class="time"> 生产日期{{ o.expirationDate }}</time>
+                                <p>数量：{{o.numbers}}</p>
+                                <span>￥{{o.price}}</span>
+                                <span>单位：{{o.unit}}</span>
                                 <el-button type="text" class="button">立即购买</el-button>
                             </div>
                         </div>
@@ -28,12 +32,12 @@
         data() {
             return {
                 bannerImg: [
-                    {url: require("../../../assets/main/chelizi.jpg")},
-                    {url: require("../../../assets/main/caomei.jpg")},
-                    {url: require('../../../assets/main/niurou.jpg')},
-                    {url: require('../../../assets/main/huotui.jpg')},
-                    {url: require('../../../assets/main/samllbaicai.jpg')},
-                    {url: require('../../../assets/main/potato.jpg')},
+                    {url: require("../../../assets/main/chelizi.jpg"), id:1},
+                    {url: require("../../../assets/main/caomei.jpg"), id:2},
+                    {url: require('../../../assets/main/niurou.jpg'), id:3},
+                    {url: require('../../../assets/main/huotui.jpg'), id:4},
+                    {url: require('../../../assets/main/samllbaicai.jpg'), id:5},
+                    {url: require('../../../assets/main/potato.jpg'), id:6},
                 ],
                 productList: [],
             };

@@ -45,7 +45,7 @@
     }
 
     .el-header, .el-footer {
-        background-color: #545c64;
+        background-color: #85C1E9;
         color: #333;
         text-align: center;
         line-height: 60px;
@@ -54,7 +54,7 @@
 
 
     .el-aside {
-        background-color: #545c64;
+        background-color: #85C1E9;
         color: #333;
         text-align: center;
         line-height: 200px;

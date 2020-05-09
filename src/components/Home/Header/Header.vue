@@ -2,7 +2,8 @@
     <div>
         <div class="left">
             <span>农产品营销系统</span>
-            <el-link :underline="false" href="/">首页</el-link>
+            <el-link :underline="false" href="/home">首页</el-link>
+            <el-link :underline="false" href="/userInfo">个人中心</el-link>
         </div>
         <div class="right">
             <el-link v-if="!$store.state.isLogin" :underline="false" href="/login">登录</el-link>
@@ -31,7 +32,7 @@
                     type: "success",
                     message: "退出成功!"
                 });
-              this.$router.push('/')
+              this.$router.push('/home')
             })
             .catch(() => {
             })
