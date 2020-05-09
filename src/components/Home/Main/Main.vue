@@ -1,25 +1,27 @@
 <template>
     <div>
         <el-carousel :interval="4000" type="card" height="400px">
-            <el-carousel-item v-for="item in 6" :key="item">
-                <h3 class="medium">{{ item }}</h3>
+            <el-carousel-item v-for="item in bannerImg" :key="item">
+                <img v-bind:src="item.url" class="bannerImg" width="100%" height="100%">
             </el-carousel-item>
         </el-carousel>
-        <el-row>
-            <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
-                <el-card :body-style="{ padding: '0px' }">
-                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                         class="image">
-                    <div style="padding: 14px;">
-                        <span>好吃的汉堡</span>
-                        <div class="bottom clearfix">
-                            <time class="time">{{ currentDate }}</time>
-                            <el-button type="text" class="button">操作按钮</el-button>
+        <div >
+            <el-row>
+                <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
+                    <el-card :body-style="{ padding: '0px' }">
+                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                             class="image">
+                        <div style="padding: 14px;">
+                            <span>好吃的汉堡</span>
+                            <div class="bottom clearfix">
+                                <time class="time">{{ currentDate }}</time>
+                                <el-button type="text" class="button">操作按钮</el-button>
+                            </div>
                         </div>
-                    </div>
-                </el-card>
-            </el-col>
-        </el-row>
+                    </el-card>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </template>
 
@@ -28,6 +30,14 @@
         name: "Main",
         data() {
             return {
+                bannerImg: [
+                    {url: require("../../../assets/main/chelizi.jpg")},
+                    {url: require("../../../assets/main/caomei.jpg")},
+                    {url: require('../../../assets/main/niurou.jpg')},
+                    {url: require('../../../assets/main/huotui.jpg')},
+                    {url: require('../../../assets/main/samllbaicai.jpg')},
+                    {url: require('../../../assets/main/potato.jpg')},
+                ],
                 currentDate: new Date()
             };
         }
@@ -45,14 +55,6 @@
         opacity: 0.75;
         line-height: 200px;
         margin: 0;
-    }
-
-    .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-    }
-
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
     }
 
     .time {
