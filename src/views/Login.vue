@@ -29,7 +29,7 @@
         },
         methods: {
             userLogin(username, password) {
-                this.$http.login(username, password)
+            this.$http.login({username, password})
                     .then(res => {
                         if (res.code == 200) {
                             this.$message({

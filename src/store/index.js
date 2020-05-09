@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        isLogin: false,
+        isLogin: localStorage.isLogin ? true : false,
         token: localStorage.token
     },
     getters: {
@@ -15,6 +15,7 @@ export default new Vuex.Store({
     mutations: {
         // 保存登录状态
         userStatus(state, flag) {
+            localStorage.isLogin = flag
             state.isLogin = flag
         },
     },
@@ -30,6 +31,7 @@ export default new Vuex.Store({
                   if(res.code === 200 ) {
                        commit('userStatus', false)
                         localStorage.removeItem('token')
+                        localStorage.removeItem('isLogin')
                         resolve(res)
                   } else {
                     reject(res)
