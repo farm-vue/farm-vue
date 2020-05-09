@@ -30,7 +30,7 @@
         },
         methods: {
             userLogin(username, password) {
-            this.$http.login(username, password)
+                this.$http.login(username, password)
                     .then(res => {
                         if (res.code === 200) {
                             this.$message({
@@ -47,6 +47,7 @@
                             }
 
                             localStorage.setItem("Flag", "isLogin");
+                            localStorage.setItem('Flag', 'isAdmin');
                             localStorage.token = res.token
                             this.$router.push('/')
                         } else {
