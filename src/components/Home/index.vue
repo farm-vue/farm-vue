@@ -19,7 +19,7 @@
 
 <style scoped>
     .el-header {
-        background-color: white;
+        background-color: aliceblue;
         color: #333;
         text-align: center;
         line-height: 60px;

@@ -5,17 +5,17 @@
                 <img v-bind:src="item.url" class="bannerImg" width="100%" height="100%">
             </el-carousel-item>
         </el-carousel>
-        <div >
-            <el-row>
-                <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
-                    <el-card :body-style="{ padding: '0px' }">
+        <div class="card">
+            <el-row align="center">
+                <el-col :span="4" v-for="(o, index) in productList" :key="index" :offset="index > 0 ? 2 : 0" >
+                    <el-card :body-style="{ padding: '0px'}">
                         <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
                              class="image">
                         <div style="padding: 14px;">
-                            <span>好吃的汉堡</span>
+                            <span>{{o.name}}</span>
                             <div class="bottom clearfix">
-                                <time class="time">{{ currentDate }}</time>
-                                <el-button type="text" class="button">操作按钮</el-button>
+<!--                                <time class="time">{{ currentDate }}</time>-->
+                                <el-button type="text" class="button">立即购买</el-button>
                             </div>
                         </div>
                     </el-card>
@@ -38,8 +38,19 @@
                     {url: require('../../../assets/main/samllbaicai.jpg')},
                     {url: require('../../../assets/main/potato.jpg')},
                 ],
-                currentDate: new Date()
+                productList: [],
             };
+        },
+        methods: {
+            getProductList(){
+                this.$http.productList().then(res => {
+                    console.log(res)
+                    this.productList = res
+                })
+            }
+        },
+        created() {
+            this.getProductList()
         }
     }
 </script>
@@ -85,5 +96,11 @@
 
     .clearfix:after {
         clear: both
+    }
+
+    .card {
+        /*background-color: #FBFCFC ;*/
+        height: 100%;
+        padding-left: 300px;
     }
 </style>
