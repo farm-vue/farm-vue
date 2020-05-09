@@ -6,7 +6,7 @@ Axios.defaults.baseURL = "http://47.98.153.78:9000/";
 Axios.interceptors.request.use(function (config) {
     // Do something before request is sent
     // console.log(22, localStorage.token)
-    if (localStorage.token) {
+    if (localStorage.token && config.url !== '/user/login/') {
         config.headers['Authorization'] = 'Token ' + localStorage.token
     }
     return config;
