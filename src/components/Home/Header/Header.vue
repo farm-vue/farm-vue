@@ -7,7 +7,7 @@
         <div class="right">
             <el-link v-if="!$store.state.isLogin" :underline="false" href="/login">登录</el-link>
             <el-link v-if="!$store.state.isLogin" :underline="false" href="/register">注册</el-link>
-            <div style="float: right; margin: 10px 10px 0 10px"><el-avatar v-if="$store.state.isLogin">user</el-avatar></div>
+            <div style="float: right; margin: 10px 10px 0 10px"><el-avatar v-if="$store.state.isLogin">{{ user }}</el-avatar></div>
             <el-link v-if="$store.state.isAdmin" :underline="false" href="/console">后台管理</el-link>
             <el-link v-if="$store.state.isLogin" :underline="false" @click="logouttt">注销</el-link>
         </div>
@@ -17,6 +17,12 @@
 <script>
     export default {
         name: "Header",
+        data() {
+            return {
+                user: localStorage.isLogin
+            }
+
+        },
         methods: {
           logouttt() {
             this.$store.dispatch('logout', localStorage.token)

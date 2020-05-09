@@ -1,16 +1,14 @@
 <template>
     <div>
         <el-carousel :interval="4000" type="card" height="400px">
-            <el-carousel-item v-for="item in bannerImg" :key="item">
+            <el-carousel-item v-for="(item, index) in bannerImg" :key="index">
                 <img v-bind:src="item.url" class="bannerImg" width="100%" height="100%">
             </el-carousel-item>
         </el-carousel>
         <div class="card">
-            <el-row align="center">
-                <el-col :span="4" v-for="(o, index) in productList" :key="index" :offset="index > 0 ? 2 : 0" >
+                <div v-for="(o, index) in productList" :key="index" >
                     <el-card :body-style="{ padding: '0px'}">
-                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                             class="image">
+                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
                         <div style="padding: 14px;">
                             <span>{{o.name}}</span>
                             <div class="bottom clearfix">
@@ -19,8 +17,7 @@
                             </div>
                         </div>
                     </el-card>
-                </el-col>
-            </el-row>
+                </div>
         </div>
     </div>
 </template>
@@ -101,6 +98,14 @@
     .card {
         /*background-color: #FBFCFC ;*/
         height: 100%;
-        padding-left: 300px;
+        width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .card >div{
+        width: 22%;
+        margin-right: 2%;
+        margin-bottom: 20px;
     }
 </style>

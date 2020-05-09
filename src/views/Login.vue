@@ -42,13 +42,12 @@
                             this.$store.commit('userStatus', true)
                             if (res.user.role === '1') {
                                 this.$store.commit('userAdmin', true)
-                                localStorage.setItem('isAdmin', 'FLAG');
+                                localStorage.setItem('isAdmin', res.user.nickname);
                             } else {
                                 this.$store.commit('userAdmin', false)
                                 localStorage.removeItem('isAdmin');
                             }
-
-                            localStorage.setItem("isLogin", "Flag");
+                            localStorage.setItem("isLogin", res.user.username);
                             localStorage.token = res.token
                             this.$router.push('/')
                         } else {
