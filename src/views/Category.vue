@@ -9,8 +9,7 @@
                 </div>
             </el-col>
         </el-row>
-        <el-table ref="multipleTable" :data="tableData" max-height="730" border
-                  @selection-change="handleSelectionChange">
+        <el-table ref="multipleTable" :data="tableData" max-height="730" border>
             <el-table-column type="selection" width="50"></el-table-column>
             <el-table-column prop="id" label="ID"></el-table-column>
             <el-table-column prop="name" label="账号"></el-table-column>
@@ -37,8 +36,7 @@
                 </el-form>
                 <div class="demo-drawer__footer">
                     <el-button @click="cancelForm">取 消</el-button>
-                    <el-button type="primary" @click="$refs.drawer.closeDrawer()" :loading="loading">{{ loading ?
-                        '提交中...' : '确 定' }}
+                    <el-button type="primary" @click="createEdit()" :loading="loading">{{ loading ? '提交中...' : '确 定' }}
                     </el-button>
                 </div>
             </div>
@@ -109,6 +107,12 @@
                 this.dialog = false;
                 clearTimeout(this.timer);
             },
+            createEdit(form){
+                if (form.name == null) {
+                    console.log(form)
+                }
+                this.$refs.drawer.closeDrawer()
+            }
         },
         created() {
             this.getCategoryList()

@@ -27,6 +27,10 @@ export function userDetail(userId) {
     return http.get(url.userUrl + userId + '/').then(res => res.data)
 }
 
+export function userInfo() {
+    return http.get(url.userUrl + 'token_user/').then(res => res.data)
+}
+
 export function userPatch(userId, data) {
     return http.patch(url.userUrl + userId + '/', data).then(res => res.data)
 }
@@ -55,8 +59,8 @@ export function productList() {
     return http.get(url.productUrl).then(res => res.data)
 }
 
-export function productAdd(param) {
-    return http.post(url.productUrl, param).then(res => res.data)
+export function productAdd(data) {
+    return http.post(url.productUrl, data).then(res => res.data)
 }
 
 export function productPatch(data) {

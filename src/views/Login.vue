@@ -1,8 +1,8 @@
 <template>
-    <el-container>
-        <el-main>
-            欢迎登录
-            <el-form ref="form" :model="form" label-width="80px">
+    <div class="el-container">
+        <div class="login">
+            <p>欢迎登录</p>
+            <el-form ref="form" :model="form" label-width="80px" class="form">
                 <el-form-item label="用户名">
                     <el-input v-model="form.username"></el-input>
                 </el-form-item>
@@ -10,11 +10,11 @@
                     <el-input v-model="form.password" type="password"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="userLogin(form.username, form.password)">登录</el-button>
+                    <el-button type="primary" @click="login">登录</el-button>
                 </el-form-item>
             </el-form>
-        </el-main>
-    </el-container>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -29,26 +29,14 @@
             }
         },
         methods: {
-            userLogin(username, password) {
-                this.$http.login(username, password)
+            login() {
+                this.$store.dispatch('login', this.form)
                     .then(res => {
                         if (res.code === 200) {
                             this.$message({
-                                message: res.data,
-                                type: "success"
+                                type: "success",
+                                message: "登录成功!"
                             });
-                            //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
-                            //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
-                            this.$store.commit('userStatus', true)
-                            if (res.user.role === '1') {
-                                this.$store.commit('userAdmin', true)
-                                localStorage.setItem('isAdmin', res.user.nickname);
-                            } else {
-                                this.$store.commit('userAdmin', false)
-                                localStorage.removeItem('isAdmin');
-                            }
-                            localStorage.setItem("isLogin", res.user.username);
-                            localStorage.token = res.token
                             this.$router.push('/home')
                         } else {
                             this.$message({
@@ -57,22 +45,37 @@
                             })
                         }
                     })
+                    .catch(() => {
+                    })
             }
         }
     }
 </script>
 
 <style scoped>
-    .el-container {
-        height: 960px;
-        background-image: url("../assets/beij.jpg");
-        background-size: 100%;
-    }
-
-    .el-main {
+    html, body {
         height: 100%;
+        padding: 0;
+        margin: 0;
     }
 
-    .el-form {
+    .el-container {
+        height: 100%;
+        background: url("../assets/beij.jpg") no-repeat;
+        background-size: cover;
     }
+
+    .login {
+        padding: 250px 0 548px;
+        margin: 0 auto;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .form {
+        width: 300px;
+    }
+
 </style>
