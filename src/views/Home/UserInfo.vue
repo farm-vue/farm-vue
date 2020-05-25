@@ -111,6 +111,9 @@
                 this.isUserInfo = true
             },
             handleSaveStreet() {
+                this.$http.userPatch(localStorage.userId, this.form).then(res => {
+                    console.log(res)
+                })
                 this.isUserInfo = false
             },
             // enterSystem() {

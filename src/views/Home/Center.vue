@@ -13,14 +13,22 @@
             </el-menu>
         </el-aside>
         <el-main>
-            <router-view/>
+            <UserInfo v-if="$route.path === '/userInfo'"/>
+            <OrderInfo v-if="$route.path === '/orderInfo'"/>
         </el-main>
     </el-container>
 </template>
 
 <script>
+    import UserInfo from "./UserInfo";
+    import OrderInfo from "./OrderInfo";
+
     export default {
-        name: "Center"
+        name: "Center",
+        components: {
+            UserInfo,
+            OrderInfo,
+        }
     }
 </script>
 
@@ -29,14 +37,14 @@
         background-color: #D3DCE6;
         color: #333;
         text-align: center;
-        line-height: 200px;
+        /*line-height: 200px;*/
     }
 
     .el-main {
-        background-color: #E9EEF3;
+        /*background-color: #E9EEF3;*/
         color: #333;
         text-align: center;
-        line-height: 160px;
+        /*line-height: 160px;*/
     }
 
     body > .el-container {

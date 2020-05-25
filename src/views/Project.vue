@@ -58,15 +58,12 @@
                     </el-form-item>
                     <el-form-item label="类别" :label-width="formLabelWidth">
                         <el-select v-model="form.category" placeholder="请选择类别" style="width: 250px">
-                            <el-option v-for="item in category" :key="item.id" :label="item.name"
-                                       :value="item.id"></el-option>
+                            <el-option v-for="item in category" :key="item.id" :label="item.name" :value="item.id"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-form>
                 <div class="demo-drawer__footer">
-                    <el-button @click="cancelForm">取 消</el-button>
-                    <el-button type="primary" @click="createProduct(form)" :loading="loading">{{ loading ? '提交中...' : '确定' }}
-                    </el-button>
+                    <el-button type="primary" @click="createEditProduct(form)">确认</el-button>
                 </div>
             </div>
         </el-drawer>
@@ -88,7 +85,6 @@
                     total: 10
                 },
                 dialog: false,
-                loading: false,
                 form: {
                     name: '',
                     numbers: '',
@@ -107,7 +103,6 @@
                     {id: '5', name: '吨'},
                 ],
                 formLabelWidth: '80px',
-                timer: null,
                 category: [],
             }
         },
@@ -124,7 +119,6 @@
 
             // 删除产品信息操作
             handleDelete(index, row) {
-                console.log(index, row.id);
                 this.$http.productDel(row.id).then(() => {
                         this.tableData.splice(index, 1);
                         this.$message({
@@ -152,22 +146,30 @@
                 })
             },
 
-            createProduct(form) {
-                console.log(form)
-                this.$http.productAdd(form).then(res => {
-                    console.log(res)
-                }).catch(error => {
-                    console.log(error)
-                })
-                this.$refs.drawer.closeDrawer()
-                this.getProductList()
-            },
+            createEditProduct(form) {
+                if (form.id === null) {
+                    this.$http.productAdd(form).then(res => {
+                        console.log(res)
+                        this.$refs.drawer.closeDrawer()
+                        this.tableData.push(res)
+                        this.$message({
+                            type: "success",
+                            message: "新增成功!"
+                        });
 
-            cancelForm() {
-                this.loading = false;
-                this.dialog = false;
-                clearTimeout(this.timer);
-                this.form = []
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                } else {
+                    this.$http.productPut(form.id, form).then(res => {
+                        console.log(res)
+                        this.$refs.drawer.closeDrawer()
+                        this.$message({
+                            type: "success",
+                            message: "修改成功!"
+                        });
+                    })
+                }
             },
 
             // 分页

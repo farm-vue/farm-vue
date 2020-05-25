@@ -35,9 +35,7 @@
                     </el-form-item>
                 </el-form>
                 <div class="demo-drawer__footer">
-                    <el-button @click="cancelForm">取 消</el-button>
-                    <el-button type="primary" @click="createEdit()" :loading="loading">{{ loading ? '提交中...' : '确 定' }}
-                    </el-button>
+                    <el-button type="primary" @click="createEditCategory(form)">确认</el-button>
                 </div>
             </div>
         </el-drawer>
@@ -59,25 +57,23 @@
                 },
                 input: '',
                 dialog: false,
-                loading: false,
                 form: {
                     name: '',
                 },
                 formLabelWidth: '80px',
-                timer: null,
             }
         },
         methods: {
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
+
             handleEdit(index, row) {
-                console.log(index, row);
                 this.form = row
                 this.dialog = true
             },
+
             handleDelete(index, row) {
-                console.log(index, row.id);
                 this.$http.categoryDel(row.id).then(res => {
                         console.log(res)
                         this.tableData.splice(index, 1);
@@ -88,6 +84,7 @@
                     }
                 )
             },
+
             getCategoryList() {
                 this.$http.categoryList().then(res => {
                     console.log(res)
@@ -96,22 +93,29 @@
                     console.log(err);
                 })
             },
+
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
+
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
             },
-            cancelForm() {
-                this.loading = false;
-                this.dialog = false;
-                clearTimeout(this.timer);
-            },
-            createEdit(form){
-                if (form.name == null) {
-                    console.log(form)
+
+            createEditCategory(form) {
+                if (form.id == null) {
+                    this.$http.categoryAdd(form).then(res => {
+                        console.log(res)
+                        this.$refs.drawer.closeDrawer()
+                        this.tableData.push(res)
+                    })
+                } else {
+                    this.$http.categoryPut(form.id, form).then(res => {
+                        console.log(res)
+                        this.$refs.drawer.closeDrawer()
+                    })
                 }
-                this.$refs.drawer.closeDrawer()
+
             }
         },
         created() {

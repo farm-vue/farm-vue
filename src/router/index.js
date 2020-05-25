@@ -15,25 +15,18 @@ const routes = [
         children: [
             {
                 path: '/userInfo',
-                name: 'Center',
-                component: () => import('../views/Center'),
-                children: [
-                    {
-                        path: '/userInfo',
-                        name: 'UserInfo',
-                        component: () => import('../views/Home/UserInfo')
-                    },
-                    {
-                        path: '/orderInfo',
-                        name: 'OrderInfo',
-                        component: () => import('../views/Home/OrderInfo')
-                    }
-                ]
+                name: 'UserInfo',
+                component: () => import('../views/Home/Center'),
             },
             {
-                path: '/home',
-                name: 'Main',
-                component: () => import('../components/Home/Main/Main')
+                path: '/orderInfo',
+                name: 'OrderInfo',
+                component: () => import('../views/Home/Center'),
+            },
+            {
+                path: '/shoppingCart',
+                name: 'ShoppingCart',
+                component: () => import('../views/ShoppingCart')
             }
         ]
     },
@@ -78,6 +71,10 @@ const routes = [
             },
         ]
     },
+    {
+        path: '*',
+        redirect: '/home',
+    }
 ];
 
 const router = new VueRouter({

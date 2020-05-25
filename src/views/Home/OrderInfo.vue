@@ -6,7 +6,7 @@
             <el-table-column prop="orderNumber" label="订单编号"></el-table-column>
             <el-table-column prop="name" label="订单名称"></el-table-column>
             <el-table-column prop="price" label="价格"></el-table-column>
-            <el-table-column prop="state" label="订单状态"></el-table-column>
+            <el-table-column prop="state" label="订单状态" :formatter="state"></el-table-column>
             <el-table-column fixed="right" label="操作" width="250">
                 <template slot-scope="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -38,6 +38,15 @@
                     total: 10
                 },
                 input: '',
+                userId: null,
+                orderState: [
+                    {id: '0', name: '未发货'},
+                    {id: '1', name: '待发货'},
+                    {id: '2', name: '发货中'},
+                    {id: '3', name: '交易成功'},
+                    {id: '4', name: '退货中'},
+                    {id: '5', name: '退货成功'},
+                ]
             }
         },
         methods: {
@@ -60,11 +69,14 @@
                 )
             },
             getOrderList() {
-                this.$http.orderList().then(res => {
-                    console.log(res)
-                    this.tableData = res
-                }).catch(err => {
-                    console.log(err);
+                this.$http.userInfo().then(res => {
+                    this.userId = res.data.id
+                    this.$http.orderList(this.userId).then(res => {
+                        console.log(res)
+                        this.tableData = res
+                    }).catch(err => {
+                        console.log(err);
+                    })
                 })
             },
             formatSex: function (row) {
@@ -78,6 +90,14 @@
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+            },
+            state(row) {
+                console.log(row)
+                for (let i = 0; i < this.orderState.length; i ++) {
+                    if (row.state === this.orderState[i].id) {
+                        return this.orderState[i].name
+                    }
+                }
             }
         },
         created() {

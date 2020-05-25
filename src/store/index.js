@@ -8,7 +8,7 @@ export default new Vuex.Store({
     state: {
         token: localStorage.token,
         user: !!localStorage.user,
-        isAdmin: !!localStorage.isAdmin,
+        isAdmin: localStorage.isAdmin === true,
     },
     getters: {
         // 获得登录状态
@@ -19,10 +19,12 @@ export default new Vuex.Store({
         // 保存登录状态
         userStatus(state, flag) {
             localStorage.user = flag
-            localStorage.isAdmin = flag
             state.user = flag
-            state.isAdmin = flag
         },
+        userAdmin(state, flag) {
+            localStorage.isAdmin = flag
+            state.isAdmin = flag
+        }
     },
     actions: {
         // 登录
@@ -32,8 +34,16 @@ export default new Vuex.Store({
                     if (res.code === 200) {
                         commit('userStatus', true)
                         localStorage.user = res.user.nickname ? res.user.nickname : res.user.username
-                        localStorage.isAdmin = res.user.role == '1' ? true : false
                         localStorage.token = res.token
+                        localStorage.userId = res.user.id
+                        if (res.user.role === '1') {
+                            localStorage.isAdmin = true
+                            commit("userAdmin", true)
+                        } else {
+                            console.log(res.user.role)
+                            localStorage.isAdmin = false
+                            commit("userAdmin", false)
+                        }
                         resolve(res)
                     } else {
                         reject(res)
@@ -51,9 +61,7 @@ export default new Vuex.Store({
                 logout(token).then(res => {
                     if (res.code === 200) {
                         commit('userStatus', false)
-                        localStorage.removeItem('token')
-                        localStorage.removeItem('user')
-                        localStorage.removeItem('isAdmin')
+                        localStorage.clear()
                         resolve(res)
                     } else {
                         reject(res)

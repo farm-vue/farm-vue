@@ -44,11 +44,11 @@ export function categoryList() {
 }
 
 export function categoryAdd(data) {
-    return http.post(url.productUrl, data).then(res => res.data)
+    return http.post(url.categoryUrl, data).then(res => res.data)
 }
 
-export function categoryPatch(data) {
-    return http.patch(url.productUrl, data).then(res => res.data)
+export function categoryPut(categoryId, data) {
+    return http.put(url.categoryUrl + categoryId + '/', data).then(res => res.data)
 }
 
 export function categoryDel(categoryId) {
@@ -63,15 +63,18 @@ export function productAdd(data) {
     return http.post(url.productUrl, data).then(res => res.data)
 }
 
-export function productPatch(data) {
-    return http.patch(url.productUrl, data).then(res => res.data)
+export function productPut(productId, data) {
+    return http.put(url.productUrl + productId + '/', data).then(res => res.data)
 }
 
 export function productDel(productId) {
     return http.delete(url.productUrl + productId + '/').then(res => res.data)
 }
 
-export function orderList() {
+export function orderList(userId) {
+    if (userId != null) {
+        return http.get(url.orderUrl + '?user=' + userId).then(res => res.data)
+    }
     return http.get(url.orderUrl).then(res => res.data)
 }
 
@@ -83,10 +86,22 @@ export function orderAdd(data) {
     return http.post(url.orderUrl, data).then(res => res.data)
 }
 
-export function orderPatch(data) {
-    return http.patch(url.orderUrl, data).then(res => res.data)
+export function orderPatch(orderId, data) {
+    return http.patch(url.orderUrl + orderId + '/', data).then(res => res.data)
 }
 
 export function orderDel(orderId) {
     return http.delete(url.orderUrl + orderId + '/').then(res => res.data)
+}
+
+export function shoppingCartList(userId) {
+    return http.get(url.shoppingCartUrl+ '?user=' + userId).then(res => res.data)
+}
+
+export function shoppingCartAdd(data) {
+    return http.post(url.shoppingCartUrl, data).then(res => res.data)
+}
+
+export function shoppingCartPatch(shoppingCartId, data) {
+    return http.patch(url.shoppingCartUrl + shoppingCartId + '/', data).then(res => res.data)
 }

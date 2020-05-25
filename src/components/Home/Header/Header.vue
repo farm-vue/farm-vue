@@ -35,7 +35,7 @@
                             type: "success",
                             message: "退出成功!"
                         });
-                        this.$router.push('/home')
+                        this.$router.go(0)
                     })
                     .catch(() => {
 

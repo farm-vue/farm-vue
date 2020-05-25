@@ -12,12 +12,13 @@
                         <div style="padding: 14px;">
                             <span>{{o.name}}</span>
                             <div class="bottom clearfix">
-                                <time class="time"> 生产日期{{ o.productionDate }}</time>
+                                <p><time class="time"> 生产日期{{ o.productionDate }}</time></p>
                                 <time class="time"> 生产日期{{ o.expirationDate }}</time>
                                 <p>数量：{{o.numbers}}</p>
                                 <span>￥{{o.price}}</span>
-                                <span>单位：{{o.unit}}</span>
-                                <el-button type="text" class="button">立即购买</el-button>
+                                <span style="margin: 0 0 0 10px">单位：{{o.unit}}</span>
+                                <el-button type="text" class="button" @click="addShoppingCart(o.id)">加入购物车</el-button>
+                                <el-button type="text" class="button" @click="buyShopping(o)">购买</el-button>
                             </div>
                         </div>
                     </el-card>
@@ -47,6 +48,40 @@
                 this.$http.productList().then(res => {
                     console.log(res)
                     this.productList = res
+                })
+            },
+
+            addShoppingCart(produceId) {
+                this.$http.userInfo().then(res => {
+                    var data = {
+                        "numbers": 1,
+                        "produce": produceId,
+                        "user": res.data.id
+                    }
+                    this.$http.shoppingCartAdd(data).then(res => {
+                        this.$message({
+                            type: 'success',
+                            message: '加入购物车成功！'
+                        })
+                        console.log(res)
+                    })
+                })
+            },
+
+            buyShopping(data) {
+                this.$http.orderAdd({
+                    name: data.name,
+                    price: data.numbers * data.price,
+                    numbers: 1,
+                    produce: data.id,
+                    user: localStorage.userId,
+                }, res => {
+                    console.log(res)
+                    this.$message({
+                        type: 'success',
+                        message: '购买成功！'
+                    })
+                    this.reload()
                 })
             }
         },

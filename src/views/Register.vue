@@ -1,7 +1,7 @@
 <template>
-    <el-container>
-        <el-main>
-            <el-header style="background-color: white ">欢迎注册</el-header>
+    <div class="el-container">
+        <div class="login">
+            <p>欢迎注册</p>
             <el-form ref="form" :model="form" label-width="80px">
                 <el-form-item label="用户名">
                     <el-input v-model="form.username"></el-input>
@@ -13,8 +13,8 @@
                     <el-button type="primary" @click="userRegister(form.username, form.password)">登录</el-button>
                 </el-form-item>
             </el-form>
-        </el-main>
-    </el-container>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -53,16 +53,28 @@
 </script>
 
 <style scoped>
-    .el-container {
-        height: 960px;
-        background-image: url("../assets/beij.jpg");
-        background-size: 100%;
-    }
-
-    .el-main {
+    html, body {
         height: 100%;
+        padding: 0;
+        margin: 0;
     }
 
-    .el-form {
+    .el-container {
+        height: 100%;
+        background: url("../assets/beij.jpg") no-repeat;
+        background-size: cover;
+    }
+
+    .login {
+        padding: 250px 0 548px;
+        margin: 0 auto;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .form {
+        width: 300px;
     }
 </style>
