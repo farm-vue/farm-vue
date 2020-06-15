@@ -3,7 +3,7 @@
         <div class="left">
             <span>农产品营销系统</span>
             <el-link :underline="false" href="/home">首页</el-link>
-            <el-link :underline="false" href="/userInfo">个人中心</el-link>
+            <el-link v-if="user" :underline="false" href="/userInfo">个人中心</el-link>
         </div>
         <div class="right">
             <el-link v-if="!user" :underline="false" href="/login">登录</el-link>
